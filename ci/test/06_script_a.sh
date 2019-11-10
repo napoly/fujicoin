@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #
-# Copyright (c) 2018 The Bitcoin Core developers
+# Copyright (c) 2018 The Fujicoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 export LC_ALL=C.UTF-8
 
-BITCOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=$BASE_BUILD_DIR/depends/$HOST --bindir=$BASE_OUTDIR/bin --libdir=$BASE_OUTDIR/lib"
+FUJICOIN_CONFIG_ALL="--disable-dependency-tracking --prefix=$BASE_BUILD_DIR/depends/$HOST --bindir=$BASE_OUTDIR/bin --libdir=$BASE_OUTDIR/lib"
 if [ -z "$NO_DEPENDS" ]; then
   DOCKER_EXEC ccache --max-size=$CCACHE_SIZE
 fi
@@ -23,17 +23,17 @@ mkdir -p build
 cd build || (echo "could not enter build directory"; exit 1)
 
 BEGIN_FOLD configure
-DOCKER_EXEC ../configure --cache-file=config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false)
+DOCKER_EXEC ../configure --cache-file=config.cache $FUJICOIN_CONFIG_ALL $FUJICOIN_CONFIG || ( cat config.log && false)
 END_FOLD
 
 BEGIN_FOLD distdir
 DOCKER_EXEC make distdir VERSION=$HOST
 END_FOLD
 
-cd "bitcoin-$HOST" || (echo "could not enter distdir bitcoin-$HOST"; exit 1)
+cd "fujicoin-$HOST" || (echo "could not enter distdir fujicoin-$HOST"; exit 1)
 
 BEGIN_FOLD configure
-DOCKER_EXEC ./configure --cache-file=../config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false)
+DOCKER_EXEC ./configure --cache-file=../config.cache $FUJICOIN_CONFIG_ALL $FUJICOIN_CONFIG || ( cat config.log && false)
 END_FOLD
 
 set -o errtrace

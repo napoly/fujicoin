@@ -5,8 +5,8 @@ Release Process
 
 ### Before every release candidate
 
-* Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/fujicoin/fujicoin/blob/master/doc/translation_process.md#synchronising-translations).
-* Update manpages, see [gen-manpages.sh](https://github.com/fujicoin/fujicoin/blob/master/contrib/devtools/README.md#gen-manpagessh).
+* Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md#synchronising-translations).
+* Update manpages, see [gen-manpages.sh](https://github.com/bitcoin/bitcoin/blob/master/contrib/devtools/README.md#gen-manpagessh).
 * Update release candidate version in `configure.ac` (`CLIENT_VERSION_RC`).
 
 ### Before every major and minor release
@@ -23,14 +23,14 @@ Release Process
 
 ### Before every major release
 
-* Update hardcoded [seeds](/contrib/seeds/README.md), see [this pull request](https://github.com/fujicoin/fujicoin/pull/7415) for an example.
+* Update hardcoded [seeds](/contrib/seeds/README.md), see [this pull request](https://github.com/bitcoin/bitcoin/pull/7415) for an example.
 * Update [`src/chainparams.cpp`](/src/chainparams.cpp) m_assumed_blockchain_size and m_assumed_chain_state_size with the current size plus some overhead (see [this](#how-to-calculate-m_assumed_blockchain_size-and-m_assumed_chain_state_size) for information on how to calculate them).
 * Update `src/chainparams.cpp` chainTxData with statistics about the transaction count and rate. Use the output of the RPC `getchaintxstats`, see
-  [this pull request](https://github.com/fujicoin/fujicoin/pull/17002) for an example. Reviewers can verify the results by running `getchaintxstats <window_block_count> <window_last_block_hash>` with the `window_block_count` and `window_last_block_hash` from your output.
+  [this pull request](https://github.com/bitcoin/bitcoin/pull/17002) for an example. Reviewers can verify the results by running `getchaintxstats <window_block_count> <window_last_block_hash>` with the `window_block_count` and `window_last_block_hash` from your output.
 * On both the master branch and the new release branch:
   - update `CLIENT_VERSION_MINOR` in [`configure.ac`](../configure.ac)
   - update `CLIENT_VERSION_MINOR`, `PACKAGE_VERSION`, and `PACKAGE_STRING` in [`build_msvc/fujicoin_config.h`](/build_msvc/fujicoin_config.h)
-* On the new release branch in [`configure.ac`](../configure.ac) and [`build_msvc/fujicoin_config.h`](/build_msvc/fujicoin_config.h) (see [this commit](https://github.com/fujicoin/fujicoin/commit/742f7dd)):
+* On the new release branch in [`configure.ac`](../configure.ac) and [`build_msvc/fujicoin_config.h`](/build_msvc/fujicoin_config.h) (see [this commit](https://github.com/bitcoin/bitcoin/commit/742f7dd)):
   - set `CLIENT_VERSION_REVISION` to `0`
   - set `CLIENT_VERSION_IS_RELEASE` to `true`
 
@@ -61,14 +61,14 @@ If you're using the automated script (found in [contrib/gitian-build.py](/contri
 Check out the source code in the following directory hierarchy.
 
     cd /path/to/your/toplevel/build
-    git clone https://github.com/fujicoin-core/gitian.sigs.git
-    git clone https://github.com/fujicoin-core/fujicoin-detached-sigs.git
+    git clone https://github.com/bitcoin-core/gitian.sigs.git
+    git clone https://github.com/bitcoin-core/bitcoin-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
     git clone https://github.com/fujicoin/fujicoin.git
 
 ### Write the release notes
 
-Open a draft of the release notes for collaborative editing at https://github.com/fujicoin-core/fujicoin-devwiki/wiki.
+Open a draft of the release notes for collaborative editing at https://github.com/bitcoin-core/bitcoin-devwiki/wiki.
 
 For the period during which the notes are being edited on the wiki, the version on the branch should be wiped and replaced with a link to the wiki which should be used for all announcements until `-final`.
 
@@ -116,7 +116,7 @@ Ensure gitian-builder is up-to-date:
 
     pushd ./gitian-builder
     mkdir -p inputs
-    wget -P inputs https://fujicoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
+    wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
     echo 'a8c4e9cafba922f89de0df1f2152e7be286aba73f78505169bc351a7938dd911 inputs/osslsigncode-Backports-to-1.7.1.patch' | sha256sum -c
     wget -P inputs https://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
     echo 'f9a8cdb38b9c309326764ebc937cba1523a3a751a7ab05df3ecc99d18ae466c9 inputs/osslsigncode-1.7.1.tar.gz' | sha256sum -c
@@ -228,7 +228,7 @@ Codesigner only: Commit the detached codesign payloads:
 Non-codesigners: wait for Windows/macOS detached signatures:
 
 - Once the Windows/macOS builds each have 3 matching signatures, they will be signed with their respective release keys.
-- Detached signatures will then be committed to the [fujicoin-detached-sigs](https://github.com/fujicoin-core/fujicoin-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
+- Detached signatures will then be committed to the [fujicoin-detached-sigs](https://github.com/bitcoin-core/bitcoin-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
 Create (and optionally verify) the signed macOS binary:
 
@@ -307,14 +307,14 @@ fujicoin.org (see below for fujicoin.org update instructions).
 - Update fujicoin.org version
 
   - First, check to see if the Fujicoin.org maintainers have prepared a
-    release: https://github.com/fujicoin-dot-org/fujicoin.org/labels/Core
+    release: https://github.com/bitcoin-dot-org/bitcoin.org/labels/Core
 
       - If they have, it will have previously failed their Travis CI
         checks because the final release files weren't uploaded.
         Trigger a Travis CI rebuild---if it passes, merge.
 
   - If they have not prepared a release, follow the Fujicoin.org release
-    instructions: https://github.com/fujicoin-dot-org/fujicoin.org/blob/master/docs/adding-events-release-notes-and-alerts.md#release-notes
+    instructions: https://github.com/bitcoin-dot-org/bitcoin.org/blob/master/docs/adding-events-release-notes-and-alerts.md#release-notes
 
   - After the pull request is merged, the website will automatically show the newest version within 15 minutes, as well
     as update the OS download links. Ping @saivann/@harding (saivann/harding on Freenode) in case anything goes wrong
@@ -324,20 +324,20 @@ fujicoin.org (see below for fujicoin.org update instructions).
   - fujicoincore.org blog post
 
   - fujicoincore.org maintained versions update:
-    [table](https://github.com/fujicoin-core/fujicoincore.org/commits/master/_includes/posts/maintenance-table.md)
+    [table](https://github.com/bitcoin-core/bitcoincore.org/commits/master/_includes/posts/maintenance-table.md)
 
   - fujicoincore.org RPC documentation update
 
   - Update packaging repo
 
-      - Notify BlueMatt so that he can start building [the PPAs](https://launchpad.net/~fujicoin/+archive/ubuntu/fujicoin)
+      - Notify BlueMatt so that he can start building [the PPAs](https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin)
 
       - Create a new branch for the major release "0.xx" (used to build the snap package)
 
       - Notify MarcoFalke so that he can start building the snap package
 
-        - https://code.launchpad.net/~fujicoin-core/fujicoin-core-snap/+git/packaging (Click "Import Now" to fetch the branch)
-        - https://code.launchpad.net/~fujicoin-core/fujicoin-core-snap/+git/packaging/+ref/0.xx (Click "Create snap package")
+        - https://code.launchpad.net/~bitcoin-core/bitcoin-core-snap/+git/packaging (Click "Import Now" to fetch the branch)
+        - https://code.launchpad.net/~bitcoin-core/bitcoin-core-snap/+git/packaging/+ref/0.xx (Click "Create snap package")
         - Name it "fujicoin-core-snap-0.xx"
         - Leave owner and series as-is
         - Select architectures that are compiled via gitian
@@ -348,21 +348,21 @@ fujicoin.org (see below for fujicoin.org update instructions).
         - Put "0.xx" in the track field
         - Click "create snap package"
         - Click "Request builds" for every new release on this branch (after updating the snapcraft.yml in the branch to reflect the latest gitian results)
-        - Promote release on https://snapcraft.io/fujicoin-core/releases if it passes sanity checks
+        - Promote release on https://snapcraft.io/bitcoin-core/releases if it passes sanity checks
 
   - This repo
 
       - Archive the release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
 
-      - Create a [new GitHub release](https://github.com/fujicoin/fujicoin/releases/new) with a link to the archived release notes
+      - Create a [new GitHub release](https://github.com/bitcoin/bitcoin/releases/new) with a link to the archived release notes
 
-      - Create a pinned meta-issue for testing the release candidate (see [this issue](https://github.com/fujicoin/fujicoin/issues/15555) for an example) and provide a link to it in the release announcements where useful
+      - Create a pinned meta-issue for testing the release candidate (see [this issue](https://github.com/bitcoin/bitcoin/issues/15555) for an example) and provide a link to it in the release announcements where useful
 
 - Announce the release:
 
   - fujicoin-dev and fujicoin-core-dev mailing list
 
-  - Fujicoin Core announcements list https://fujicoincore.org/en/list/announcements/join/
+  - Fujicoin Core announcements list https://bitcoincore.org/en/list/announcements/join/
 
   - Update title of #fujicoin on Freenode IRC
 

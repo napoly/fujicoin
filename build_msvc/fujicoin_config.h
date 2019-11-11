@@ -352,7 +352,7 @@
 #define PACKAGE_TARNAME "fujicoin"
 
 /* Define to the home page for this package. */
-#define PACKAGE_URL "https://fujicoincore.org/"
+#define PACKAGE_URL "https://fujicoin.org/"
 
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "0.18.99"

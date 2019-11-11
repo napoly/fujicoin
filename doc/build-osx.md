@@ -112,7 +112,7 @@ tail -f $HOME/Library/Application\ Support/Fujicoin/debug.log
 ## Notes
 * Tested on OS X 10.10 Yosemite through macOS 10.14 Mojave on 64-bit Intel
 processors only.
-* Building with downloaded Qt binaries is not officially supported. See the notes in [#7714](https://github.com/fujicoin/fujicoin/issues/7714).
+* Building with downloaded Qt binaries is not officially supported. See the notes in [#7714](https://github.com/bitcoin/bitcoin/issues/7714).
 
 ## Deterministic macOS DMG Notes
 Working macOS DMGs are created in Linux by combining a recent `clang`, the Apple
@@ -202,7 +202,7 @@ deterministic. Here's how it works:
   of a tarball, which also contains all of the tools that have been previously (deterministically)
   built in order to create a final DMG.
 - The Apple keyholder uses this unsigned app to create a detached signature, using the
-  script that is also included there. Detached signatures are available from this [repository](https://github.com/fujicoin-core/fujicoin-detached-sigs).
+  script that is also included there. Detached signatures are available from this [repository](https://github.com/bitcoin-core/bitcoin-detached-sigs).
 - Builders feed the unsigned app + detached signature back into Gitian. It uses the
   pre-built tools to recombine the pieces into a deterministic DMG.
 

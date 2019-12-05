@@ -712,6 +712,7 @@ public:
 
     /** Check whether we are doing an initial block download (synchronizing from disk or network) */
     bool IsInitialBlockDownload() const;
+    static bool IsStartUp;
 
     /**
      * Make various assertions about the state of the block index.

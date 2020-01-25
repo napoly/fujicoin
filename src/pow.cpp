@@ -12,7 +12,7 @@
 #include <primitives/block.h>
 #include <uint256.h>
 
-static CBigNum bnProofOfWorkLimit(~uint256_old(0) >> 20); // Fujicoin: starting difficulty is 1 / 2^12
+static CBigNum bnProofOfWorkLimit(~arith_uint256(0) >> 20); // Fujicoin: starting difficulty is 1 / 2^12
 //params.powLimit "00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
